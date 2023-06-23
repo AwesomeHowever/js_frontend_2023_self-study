@@ -17,16 +17,18 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="row d-flex justify-content-center container">
-    <div className="col-md-8">
-			  <Provider store={this.props.store}>
-				<Router>
-				  <Routes>
-					<Route path="/" element={<ToDoList />} />
-					<Route path="/add" element={<ToDoTaskAdd />} />
-				  </Routes>
-				</Router>
-			  </Provider>
+      <div className="vh-100 gradient-custom">
+		<div className="col col-xl-10">
+			<div class="container py-5 h-100">
+				  <Provider store={this.props.store}>
+					<Router>
+					  <Routes>
+						<Route path="/" element={<ToDoList />} />
+						<Route path="/add" element={<ToDoTaskAdd />} />
+					  </Routes>
+					</Router>
+				  </Provider>
+			</div>
 		</div>
 	  </div>
     );

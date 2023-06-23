@@ -9,7 +9,26 @@ class ToDoTaskAddInner extends React.Component {
 
     this.state =  {
       name: '',
-      description: ''
+      description: '',
+	  tvsets: [
+            {id: 123, value: 'Телевизор Samsung UE50BU8000U',    selected: false},
+            {id: 456, value: 'Телевизор Samsung UE32T5300AUXCE', selected: false},
+            {id: 789, value: 'Телевизор Samsung UE43AU7100UXCE',  selected: false},
+            {id: 659, value: 'LED телевизор 32" Toshiba 32V35LE', selected: false}
+        ]
+    }
+	
+	this.handleChange = (event) => {
+        const options = event.target.options;
+        this.state.tvsets.forEach((lang, index, tvsets) => {
+            tvsets[index].selected = options[index].selected;
+        });
+        this.setState({tvsets: this.state.tvsets});
+    }
+
+    this.handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state.tvsets);
     }
     
     this.onNameChange = this.onNameChange.bind(this);
@@ -36,7 +55,7 @@ class ToDoTaskAddInner extends React.Component {
   onAddFormSubmit(e) { 
     e.preventDefault();
 
-      fetch((`tasks`), {
+      fetch('tasks', {
                method: 'POST', 
                body: JSON.stringify({
                  name: this.state.name, 
@@ -52,33 +71,47 @@ class ToDoTaskAddInner extends React.Component {
 		this.props.history('/');
       });
   }
-  
+
+
+
   render() {
+	  const selected = [];
+        this.state.tvsets.forEach(lang => {
+            if (lang.selected) {selected.push(lang.id); this.state.name=lang.value;}
+        });
     return (
 		<div className="card-hover-shadow-2x mb-3 card">
-        <div className="card-header-tab card-header">
-          <div className="card-header-title font-size-lg text-capitalize font-weight-normal">
-		    <i className="fa fa-tasks"></i>&nbsp;Add task
+			<div class="card">
+          <div class="card-body p-5">
+			<i className="fa fa-tasks"></i>&nbsp; Выбор техники
 				</div>
-            </div>
+			</div>
 				<form onSubmit={this.onAddFormSubmit}>
-				<div className="widget-content">
-					<div className="widget-content-wrapper">
-						<input type="text" value={this.state.name} onChange={this.onNameChange} placeholder="Name" className="form-control" />
-						<input type="text" value={this.state.description} onChange={this.onDescriptionChange} placeholder="Description" className="form-control" />
-						<input type="submit" value="Add" className="btn btn-primary" />
-					</div>
-				</div>
+				
+				<select
+                    name="tvsets"
+                    value={selected}
+                    onChange={this.handleChange}
+                    multiple={true}
+                    size="4"
+                >
+                {this.state.tvsets.map(lang =>
+                    <option key={lang.id} value={lang.id}>{lang.value}</option>
+					
+				
+                )}
+                </select>
+                <input type="submit" value="В корзину" />
+				
+				
 				</form>
-					<div className="d-block text-right card-footer">
-						<NavLink to="/"  className="btn btn-primary">Back to the list</NavLink>
+					<div className="vh-100 gradient-custom">
+						<NavLink to="/"  onClick="location.reload()" className="btn btn-info ms-1">Вернуться к списку заказов</NavLink>
 						<div className="form-row">
-							<div className="forn-group col-xs-5">
 							</div>
 							<div className="forn-group col-xs-5">
 							</div>
 							<div className="forn-group col-xs-2">
-							</div>
 						</div>
 					</div>
 			</div>
