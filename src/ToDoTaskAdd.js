@@ -14,13 +14,24 @@ class ToDoTaskAddInner extends React.Component {
             {id: 123, value: 'Телевизор Samsung UE50BU8000U',    selected: false},
             {id: 456, value: 'Телевизор Samsung UE32T5300AUXCE', selected: false},
             {id: 789, value: 'Телевизор Samsung UE43AU7100UXCE',  selected: false},
-            {id: 659, value: 'LED телевизор 32" Toshiba 32V35LE', selected: false}
+            {id: 659, value: 'LED телевизор 32" Toshiba 32V35LE', selected: false},
+			{id: 867, value: 'Телевизор 43" Philips 43PUS7406/60',  selected: false},
+			{id: 890, value: 'Телевизор 32" Artel A32KH5500',  selected: false},
+            {id: 784, value: 'Телевизор 50" Haier 50 Smart TV S3', selected: false},
+			{id: 791, value: 'Телевизор 32" Hi VHIX-32F199MSA',  selected: false},
+			{id: 792, value: 'Телевизор 50" Hisense 50A6BG',  selected: false},
+            {id: 760, value: 'Телевизор Яндекс 43" - умный телевизор с Алисой (YNDX-00071)', selected: false},
+			{id: 762, value: 'Телевизор 43" Artel UA43H3401',  selected: false},
+			{id: 763, value: 'Телевизор 50" Haier 50 Smart TV S1', selected: false},
+			{id: 755, value: 'Телевизор 43" Haier 43 Smart TV S1',  selected: false},
+			{id: 720, value: 'Телевизор 55" Hisense 55E7HQ',  selected: false},
+            {id: 721, value: 'Телевизор 50" Artel UA50H3502', selected: false}
         ]
     }
 	
 	this.handleChange = (event) => {
         const options = event.target.options;
-        this.state.tvsets.forEach((lang, index, tvsets) => {
+        this.state.tvsets.forEach((tvset, index, tvsets) => {
             tvsets[index].selected = options[index].selected;
         });
         this.setState({tvsets: this.state.tvsets});
@@ -76,8 +87,8 @@ class ToDoTaskAddInner extends React.Component {
 
   render() {
 	  const selected = [];
-        this.state.tvsets.forEach(lang => {
-            if (lang.selected) {selected.push(lang.id); this.state.name=lang.value;}
+        this.state.tvsets.forEach(tvset => {
+            if (tvset.selected) {selected.push(tvset.id); this.state.name=tvset.value;}
         });
     return (
 		<div className="card-hover-shadow-2x mb-3 card">
@@ -93,10 +104,10 @@ class ToDoTaskAddInner extends React.Component {
                     value={selected}
                     onChange={this.handleChange}
                     multiple={true}
-                    size="4"
+                    size="15"
                 >
-                {this.state.tvsets.map(lang =>
-                    <option key={lang.id} value={lang.id}>{lang.value}</option>
+                {this.state.tvsets.map(tvsets =>
+                    <option key={tvsets.id} value={tvsets.id}>{tvsets.value}</option>
 					
 				
                 )}

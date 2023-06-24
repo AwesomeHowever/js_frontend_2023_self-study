@@ -10,7 +10,7 @@ class ToDoList extends React.Component {
 		<div class="card rounded-3">
           <div class="card-body p-4">
 			<div className="card-header-title font-size-lg text-capitalize font-weight-normal">
-				<i className="fa fa-tasks"></i>&nbsp;Task Lists</div>
+				<i className="fa fa-tasks"></i>&nbsp;Список заказов</div>
           
 				</div>
 					<div className="scroll-area-sm">
