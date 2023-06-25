@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { todoAdd } from './actions';
 
 class ToDoTaskAddInner extends React.Component {
   constructor(props) { 
@@ -66,7 +65,7 @@ class ToDoTaskAddInner extends React.Component {
   onAddFormSubmit(e) { 
     e.preventDefault();
 
-      fetch('tasks', {
+      fetch((`tasks`), {
                method: 'POST', 
                body: JSON.stringify({
                  name: this.state.name, 
@@ -78,8 +77,8 @@ class ToDoTaskAddInner extends React.Component {
              }).then((res) => {
                  return res.json();
              }).then((data) => {
-		this.props.dispatch(todoAdd(data._id, data.name, data.description));
 		this.props.history('/');
+		window.location.reload();
       });
   }
 
@@ -117,7 +116,7 @@ class ToDoTaskAddInner extends React.Component {
 				
 				</form>
 					<div className="vh-100 gradient-custom">
-						<NavLink to="/"  onClick="location.reload()" className="btn btn-info ms-1">Вернуться к списку заказов</NavLink>
+						<NavLink to="/" className="btn btn-info ms-1">Вернуться к списку заказов</NavLink>
 						<div className="form-row">
 							</div>
 							<div className="forn-group col-xs-5">
